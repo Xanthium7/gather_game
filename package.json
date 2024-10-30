@@ -9,8 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "grid-engine": "^2.45.4",
     "next": "15.0.1",
-    "phaser3": "^0.4.34",
+    "phaser": "^3.86.0",
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "19.0.0-rc-69d4b800-20241021"
   },
