@@ -1,15 +1,15 @@
 "use client";
-import { Game as GameType } from "phaser";
 import { useEffect } from "react";
+import dynamic from "next/dynamic";
 
-export default function Home() {
+const Home = () => {
   useEffect(() => {
     async function initPhaser() {
       const Phaser = await import("phaser");
       const { default: GridEngine } = await import("grid-engine");
+      const Preloader = (await import("./scenes/Preloader")).default;
+      const TestScene = (await import("./scenes/TestScene")).default;
 
-      // const {default: Preloader} = await import()
-      // const {default: TestScene} = await import()
       const game = new Phaser.Game({
         type: Phaser.AUTO,
         width: 800,
@@ -20,26 +20,10 @@ export default function Home() {
         scale: {
           zoom: 2,
         },
-        scene: {
-          preload: function () {
-            this.load.image("sky", "assets/sky.png");
-            this.load.image("ground", "assets/platform.png");
-            this.load.image("star", "assets/star.png");
-            this.load.image("bomb", "assets/bomb.png");
-            this.load.spritesheet("dude", "assets/dude.png", {
-              frameWidth: 32,
-              frameHeight: 48,
-            });
-          },
-          create: function () {
-            this.add.image(400, 300, "sky");
-            this.add.image(400, 300, "star");
-          },
-        },
+        scene: [Preloader, TestScene],
         physics: {
           default: "arcade",
           arcade: {
-            //gravity: { y: 300 },
             debug: true,
           },
         },
@@ -52,16 +36,17 @@ export default function Home() {
             },
           ],
         },
-        backgroundColor: "#000000",
       });
     }
+
     initPhaser();
   }, []);
 
   return (
     <div className="h-screen w-screen flex justify-center items-center">
-      <h1>COOL APP</h1>
-      <div id="game-content" key="game-content" className=""></div>
+      <div id="game-content"></div>
     </div>
   );
-}
+};
+
+export default dynamic(() => Promise.resolve(Home), { ssr: false });

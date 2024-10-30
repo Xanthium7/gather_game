@@ -7,8 +7,8 @@ export default class Preloader extends Scene {
         super('preloader');
     }
     preload(){
+        this.load.tilemapTiledJSON('testmap', 'assets/tiles/testmap.json')
         this.load.image('tiles', 'assets/tiles/Overworld.png');
-        // this.load.tilemapTiledJSON('testmap', 'assets/tiles/')
        
         this.load.spritesheet('hero', 'assets/tiles/character.png', { frameWidth: 16, frameHeight: 32 });
     }
