@@ -12,9 +12,15 @@ export default class TestScene extends Scene {
     create(){
         const map = this.make.tilemap({ key : 'testmap'})
         map.addTilesetImage('RPG_ahh', 'tiles')
-        map.layers.forEach((layer, index) => {
-            map.createLayer('index', 'RPG_ahh', 0, 0)
-        })
+        // Corrected code
+        const tileset = map.addTilesetImage('RPG_ahh', 'tiles');
+        if (tileset) {
+            map.layers.forEach((layer) => {
+                map.createLayer(layer.name, tileset, 0, 0);
+            });
+        } else {
+            console.error('Tileset is null');
+        }
 
         const heroSprite = this.physics.add.sprite(0, 0, 'hero')
 
