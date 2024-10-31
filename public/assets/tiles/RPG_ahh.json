@@ -1,6 +1,6 @@
 {
     "columns": 40,
-    "image": "assets/tiles/Overworld.png",
+    "image": "Overworld.png",
     "imageheight": 576,
     "imagewidth": 640,
     "margin": 0,
